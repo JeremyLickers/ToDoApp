@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+
 const Task = () => {
-  const [place, setText] = useState("");
-  const handleClick = (description) => {
-    setText("");
+  const ref = useRef(null);
+  const handleClick = () => {
+    ref.current.value = "";
   };
 
   return (
     <div>
       <h1>your text here</h1>
-      <textarea>{place}</textarea>
+      <textarea ref={ref}>Your Text Here</textarea>
       <button
         onClick={() => {
           handleClick();
