@@ -25,6 +25,7 @@ const TaskForm = () => {
       defaultValue="">
       </TextField>
       <button>Save</button>
+      <Link to="/">Create New Task</Link>
     </div>
   );
 };
