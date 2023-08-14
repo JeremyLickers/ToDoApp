@@ -3,7 +3,6 @@ import isEmpty from "lodash.isempty"
 const TaskList = (props) => {
     const tasks = props.tasks
     if (isEmpty(tasks)) return null
-    console.log(tasks)
     return (
         <div>
         {tasks.map((task) => 
