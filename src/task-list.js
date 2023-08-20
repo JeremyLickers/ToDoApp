@@ -14,7 +14,7 @@ const TaskList = (props) => {
         {tasks.map((task) => 
             (
                 <div key={task.id}>
-                    <Link to={`/tasks/${task.id}`} >{task.name}</Link>
+                    <Link to={`/tasks/${task.id}`} ><h2>{task.name}</h2></Link>
                     <h4>{ task.startDate }</h4>
                     <h4>{ task.endDate }</h4>
                     <h3>{ task.description }</h3>
