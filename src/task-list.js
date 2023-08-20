@@ -1,15 +1,22 @@
 import isEmpty from "lodash.isempty"
+import { Link } from 'react-router-dom';
 
 const TaskList = (props) => {
     const tasks = props.tasks
+    const handleClick = (id) => {
+        fetch('http://localhost:8000/tasks/' + id, {
+            method: 'DELETE'
+        })
+    }
     if (isEmpty(tasks)) return null
     return (
         <div>
         {tasks.map((task) => 
             (
-                <div key={task.name}>
-                    <h2>{ task.name }</h2>
+                <div key={task.id}>
+                    <Link to={`/tasks/${task.id}`} >{task.name}</Link>
                     <h4>{ task.startDate }</h4>
+                    <h4>{ task.endDate }</h4>
                     <h3>{ task.description }</h3>
                 </div>
             )

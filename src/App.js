@@ -2,6 +2,7 @@ import "./App.css";
 import Menu from "./menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom";
 import TaskForm from "./task-form";
+import TaskDetails from "./taskDetails"
 function App() {
   return (
     <Router>
@@ -13,6 +14,9 @@ function App() {
           </Route>
           <Route path="/task-form">
             <TaskForm/>
+          </Route>
+          <Route path="/tasks/:id">
+            <TaskDetails/>
           </Route>
         </Switch>
       </div>
