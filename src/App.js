@@ -2,7 +2,7 @@ import "./App.css";
 import Menu from "./menu";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom";
 import TaskForm from "./task-form";
-import TaskDetails from "./taskDetails"
+import TaskDetails from "./task-details"
 function App() {
   return (
     <Router>

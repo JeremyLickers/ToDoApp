@@ -1,21 +1,32 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from 'react-router-dom';
 import { useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField } from "@mui/material"
+import isEmpty from "lodash.isempty"
 
-const TaskForm = () => {
-  const [name, setName] = useState('')
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [description, setDescription]= useState('')
+const TaskForm = ({task = null, onSave = null}) => {
+  const [name, setName] = useState(task ? task.name:'')
+  const [startDate, setStartDate] = useState(task ? task.startDate: new Date());
+  const [endDate, setEndDate] = useState(task ? task.endDate: new Date());
+  const [description, setDescription]= useState(task ? task.description: '')
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const task = { name, startDate, endDate, description}
-    fetch('http://localhost:8000/tasks', {
-      method: 'POST',headers: { "content-Type": "application/json" },
-      body: JSON.stringify(task)
-    })
+    // e.preventDefault()
+    const newTask = { name, startDate, endDate, description}
+    if (!isEmpty(task)){
+      fetch('http://localhost:8000/tasks/'+task.id, {
+        method: 'PUT',headers: { "content-Type": "application/json" },
+        body: JSON.stringify(newTask)
+      })
+    }
+    else{
+      fetch('http://localhost:8000/tasks', {
+        method: 'POST',headers: { "content-Type": "application/json" },
+        body: JSON.stringify(newTask)
+      })
+    }
+    if (isEmpty(onSave)){
+      onSave(false)
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -37,8 +48,7 @@ const TaskForm = () => {
         onChange={(e) => setDescription(e.target.value)}
         >
       </TextField>
-      <button>Save</button>
-      <Link to="/">Menu</Link>
+      <button type='submit'>Save</button>
     </form>
   );
 };

@@ -5,6 +5,7 @@ import TaskList from './task-list'
 
 const Menu = () => {
     const { data: tasks, error } = useFetch('http://localhost:8000/tasks')
+    console.log('error --- ',error)
     return (
         <div>
             { error && <div> {error} </div> }
