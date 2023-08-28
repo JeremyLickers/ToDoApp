@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TextField } from "@mui/material"
 import isEmpty from "lodash.isempty"
 
-const TaskForm = ({task = null, onSave = null}) => {
+const TaskForm = ({task = null}) => {
   const [name, setName] = useState(task ? task.name:'')
   const [startDate, setStartDate] = useState(task ? task.startDate: new Date());
   const [endDate, setEndDate] = useState(task ? task.endDate: new Date());
@@ -23,9 +23,6 @@ const TaskForm = ({task = null, onSave = null}) => {
         method: 'POST',headers: { "content-Type": "application/json" },
         body: JSON.stringify(newTask)
       })
-    }
-    if (isEmpty(onSave)){
-      onSave(false)
     }
   }
   return (

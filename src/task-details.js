@@ -18,7 +18,7 @@ const TaskDetails = () => {
             { task && 
                 <div>
                     { !editMode && <div>{task.description} <button type='button' onClick={handleEdit}>Edit</button></div> }
-                    { editMode && <TaskForm task = { task } onSave =  { setEditMode }/> }
+                    { editMode && <TaskForm task = { task } /> }
                 </div> 
             }
         </div>
