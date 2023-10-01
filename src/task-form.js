@@ -1,16 +1,26 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextField } from "@mui/material"
 import isEmpty from "lodash.isempty"
 
 const TaskForm = ({task = null}) => {
+  const handlePaste = (event) => {
+    event.preventDefault()
+    console.log('you pasted something', event.clipboardData.getData('Text'))
+  };
+  useEffect(() => {
+    window.addEventListener('paste', handlePaste)
+
+    return () => {
+      window.removeEventListener('paste', handlePaste)
+    };
+  }, []);
   const [name, setName] = useState(task ? task.name:'')
   const [startDate, setStartDate] = useState(task ? task.startDate: new Date());
   const [endDate, setEndDate] = useState(task ? task.endDate: new Date());
   const [description, setDescription]= useState(task ? task.description: '')
   const handleSubmit = (e) => {
-    // e.preventDefault()
     const newTask = { name, startDate, endDate, description}
     if (!isEmpty(task)){
       fetch('http://localhost:8000/tasks/'+task.id, {
